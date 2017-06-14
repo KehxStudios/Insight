@@ -2,16 +2,13 @@ package com.kehxstudios.insight.breadthFirstSearch;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import com.kehxstudios.insight.GameObject;
 import com.kehxstudios.insight.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 
 /**
  * Created by ReidC on 2017-06-12.

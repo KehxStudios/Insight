@@ -1,9 +1,5 @@
 package com.kehxstudios.insight.breadthFirstSearch;
 
-import android.graphics.Canvas;
-
-import com.kehxstudios.insight.GameObject;
-
 import java.util.ArrayList;
 
 /**

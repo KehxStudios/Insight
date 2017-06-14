@@ -4,10 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
-import android.view.View;
 
-import com.kehxstudios.insight.GameObject;
-import com.kehxstudios.insight.core.ViewPanel;
+import com.kehxstudios.insight.tools.GameObject;
 
 /**
  * Created by ReidC on 2017-06-10.
@@ -110,7 +108,7 @@ public class Node implements GameObject {
     }
 
     @Override
-    public void update() {
+    public void update(float delta) {
 
     }
 }

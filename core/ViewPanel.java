@@ -2,15 +2,11 @@ package com.kehxstudios.insight.core;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.Log;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 
-import com.kehxstudios.insight.GameObject;
+import com.kehxstudios.insight.tools.GameObject;
 
 import java.util.ArrayList;
 
