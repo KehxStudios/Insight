@@ -38,6 +38,11 @@ public class Vector2 {
         this.y = y;
     }
 
+    public void set(Vector2 vector) {
+        x = vector.x;
+        y = vector.y;
+    }
+
     public void normalize(float max, float min) {
         x = (x - min) / (max - min);
         y = (y - min) / (max - min);

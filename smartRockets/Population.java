@@ -3,6 +3,7 @@ package com.kehxstudios.insight.smartRockets;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.kehxstudios.insight.tools.GameObject;
 import com.kehxstudios.insight.tools.Vector2;
@@ -21,12 +22,17 @@ public class Population implements GameObject {
 
     public ViewPanel view;
 
-    public final int populationSize = 5;
-    public final float populationLifetime = 5f;
+    public float rocketWidth = 50f;
+    public float rocketHeight = 200f;
+
+    public final int populationSize = 20;
+    public final float populationLifetime = 10f;
 
     public float width, height;
 
     public float currentLifetime;
+    public float geneUpdateTimer;
+    public int currentGene;
     public int generation;
     public int completeCount;
 
@@ -37,14 +43,19 @@ public class Population implements GameObject {
 
     public Vector2 target;
 
-    public Paint rocketPaint;
+    public Paint rocketPaint, targetPaint;
 
     public Population(ViewPanel view, float width, float height) {
         this.view = view;
         this.width = width;
         this.height = height;
         currentLifetime = 0f;
+        geneUpdateTimer = 0f;
+        currentGene = 0;
         generation = 0;
+
+        DNA.geneRange = width/100;
+        DNA.geneCount = (int)populationLifetime;
 
         target = new Vector2(width/2, height/10);
 
@@ -56,7 +67,12 @@ public class Population implements GameObject {
 
         rocketPaint = new Paint();
         rocketPaint.setColor(Color.RED);
-        rocketPaint.setStyle(Paint.Style.FILL);
+        rocketPaint.setStyle(Paint.Style.STROKE);
+        rocketPaint.setStrokeWidth(12);
+
+        targetPaint = new Paint();
+        targetPaint.setColor(Color.BLUE);
+        targetPaint.setStyle(Paint.Style.FILL);
     }
 
 
@@ -109,42 +125,62 @@ public class Population implements GameObject {
         rockets = new Rocket[populationSize];
         for (int i = 0; i < rockets.length; i++) {
             rockets[i] = new Rocket(new DNA(), width/2, height/5*4);
+            Log.d("Rocket.position", "x: " + rockets[i].position.x + ", y: " + rockets[i].position.y);
         }
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawCircle(target.x, target.y, 30, rocketPaint);
+        canvas.drawCircle(target.x, target.y, 40, targetPaint);
         for (Rocket rocket : rockets) {
-            canvas.drawRect(rocket.position.x - rocket.width/2, rocket.position.y - rocket.height/2,
-                   rocket.width, rocket.height, rocketPaint);
+            canvas.save();
+            canvas.rotate(rocket.getAngle(), rocket.position.x, rocket.position.y);
+            canvas.drawRect(rocket.position.x - rocketWidth/2, rocket.position.y - rocketHeight/2,
+                    rocket.position.x + rocketWidth/2, rocket.position.y + rocketHeight/2, rocketPaint);
+            canvas.restore();
         }
     }
 
     @Override
     public void update(float delta) {
         currentLifetime += delta;
-        if (currentLifetime < populationLifetime) {
+        geneUpdateTimer += delta;
+        if (geneUpdateTimer >= 1) {
+            geneUpdateTimer--;
+            currentGene++;
+
+            if (currentGene >= DNA.geneCount) {
+                Log.d("currentGene", "Above MAX");
+                currentGene = 0;
+            }
             for (Rocket rocket : rockets) {
                 if (!rocket.completed && !rocket.crashed) {
-                    rocket.acceleration.add(rocket.dna.genes[(int) currentLifetime]);
+                    rocket.acceleration.set(rocket.dna.genes[currentGene]);
                     rocket.velocity.add(rocket.acceleration);
-                    rocket.acceleration.set(0, 0);
                     rocket.velocity.limit(rocket.maxVelocity);
+                }
+            }
+        }
+        if (currentLifetime < populationLifetime) {
+            Log.d("Update", "Begin_" + delta);
+            for (Rocket rocket : rockets) {
+                if (!rocket.completed && !rocket.crashed) {
                     rocket.position.add(rocket.velocity);
-
-                    for (Barrier barrier : barriers) {
-                        if (rocket.position.x > barrier.position.x - barrier.width/2 &&
-                                rocket.position.x < barrier.position.x + barrier.width/2 &&
-                                rocket.position.y > barrier.position.y - barrier.height/2 &&
-                                rocket.position.y < barrier.position.y + barrier.height/2) {
-                            rocket.crashed = true;
+                    Log.d("Rocket.position", "x: " + rocket.position.x + ", y: " + rocket.position.y);
+                    if (false) {
+                        for (Barrier barrier : barriers) {
+                            if (rocket.position.x > barrier.position.x - barrier.width / 2 &&
+                                    rocket.position.x < barrier.position.x + barrier.width / 2 &&
+                                    rocket.position.y > barrier.position.y - barrier.height / 2 &&
+                                    rocket.position.y < barrier.position.y + barrier.height / 2) {
+                                rocket.crashed = true;
+                            }
                         }
                     }
                     if (rocket.position.x > width ||
-                            rocket.position.x < width ||
+                            rocket.position.x < 0 ||
                             rocket.position.y > height ||
-                            rocket.position.y < height) {
+                            rocket.position.y < 0) {
                         rocket.crashed = true;
                     }
 
@@ -152,6 +188,7 @@ public class Population implements GameObject {
                 }
             }
         } else {
+            Log.d("Generation", "Next");
             checkCompleted();
             if (completeCount > 3) {
                 randomRockets();
@@ -162,6 +199,8 @@ public class Population implements GameObject {
                 generation++;
             }
             currentLifetime = 0f;
+            geneUpdateTimer = 0f;
         }
+        Log.d("Update", "End");
     }
 }

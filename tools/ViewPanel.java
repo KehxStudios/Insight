@@ -80,7 +80,7 @@ public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Ca
             delta += (now - lastTime) / ns;
             lastTime = now;
             while (delta >= 1) {
-                update(delta);
+                update(1/UPS_TARGET);
                 updates++;
                 delta--;
             }

@@ -10,8 +10,6 @@ import com.kehxstudios.insight.tools.Vector2;
 
 public class Rocket {
 
-    public static final int width = 10;
-    public static final int height = 50;
     public static final float maxVelocity = DNA.geneRange;
 
     public Vector2 position;
@@ -38,7 +36,7 @@ public class Rocket {
     public void checkTarget(Vector2 target) {
         float distance = (float)Math.sqrt((position.x - target.x)*(position.x - target.x) +
                 (position.y - target.y)*(position.y - target.y));
-        if (distance < 10) {
+        if (distance < 50) {
             position.set(target.x, target.y);
             completed = true;
             Log.d("Rocket", "COMPLETED");
@@ -56,5 +54,14 @@ public class Rocket {
         } else {
             fitness /= 4;
         }
+    }
+
+    public float getAngle() {
+        Vector2 vel = new Vector2(velocity);
+        vel.normalize(-DNA.geneRange, DNA.geneRange);
+        float angle = (float) Math.toDegrees(Math.atan2((double)velocity.y,(double)velocity.x));
+        angle += 90;
+        if(angle < 0){ angle += 360; }
+        return angle;
     }
 }
