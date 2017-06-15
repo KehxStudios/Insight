@@ -1,9 +1,6 @@
 package com.kehxstudios.insight.binaryTree;
 
-import android.util.Log;
-import android.view.View;
-
-import com.kehxstudios.insight.core.ViewPanel;
+import com.kehxstudios.insight.tools.ViewPanel;
 
 /**
  * Created by ReidC on 2017-06-10.

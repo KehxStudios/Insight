@@ -1,15 +1,14 @@
 package com.kehxstudios.insight.smartRockets;
 
-import android.graphics.Canvas;
+import android.util.Log;
 
-import com.kehxstudios.insight.tools.GameObject;
 import com.kehxstudios.insight.tools.Vector2;
 
 /**
  * Created by ReidC on 2017-06-13.
  */
 
-public class Rocket implements GameObject {
+public class Rocket {
 
     public static final int width = 10;
     public static final int height = 50;
@@ -40,8 +39,9 @@ public class Rocket implements GameObject {
         float distance = (float)Math.sqrt((position.x - target.x)*(position.x - target.x) +
                 (position.y - target.y)*(position.y - target.y));
         if (distance < 10) {
-            position = target;
+            position.set(target.x, target.y);
             completed = true;
+            Log.d("Rocket", "COMPLETED");
         } else if (distance < closest) {
             closest = distance;
         }
@@ -56,15 +56,5 @@ public class Rocket implements GameObject {
         } else {
             fitness /= 4;
         }
-    }
-
-    @Override
-    public void draw(Canvas canvas) {
-
-    }
-
-    @Override
-    public void update(float delta) {
-
     }
 }
