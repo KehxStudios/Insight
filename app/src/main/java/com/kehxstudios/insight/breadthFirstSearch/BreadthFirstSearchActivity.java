@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.kehxstudios.insight.R;
 import com.kehxstudios.insight.smartRockets.SmartRocketsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
  * Created by ReidC on 2017-06-12.
  */
 
-public class BreadthFirstSearch extends AppCompatActivity {
+public class BreadthFirstSearchActivity extends AppCompatActivity {
 
     private JSONArray jsonArray;
     private Graph graph;
@@ -29,6 +31,7 @@ public class BreadthFirstSearch extends AppCompatActivity {
 
     private Spinner actor1Spinner, actor2Spinner;
     private Button searchButton;
+    private TextView resultsText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class BreadthFirstSearch extends AppCompatActivity {
         actor1Spinner = (Spinner) findViewById(R.id.actor1Spinner);
         actor2Spinner = (Spinner) findViewById(R.id.actor2Spinner);
         searchButton = (Button) findViewById(R.id.searchButton);
+        resultsText = (TextView) findViewById(R.id.breadth_resultsText);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, actors);
@@ -77,7 +81,7 @@ public class BreadthFirstSearch extends AppCompatActivity {
                 graph.setStart(graph.getActor(actor1Spinner.getSelectedItem().toString()));
                 graph.setEnd(graph.getActor(actor2Spinner.getSelectedItem().toString()));
 
-                graph.search();
+                resultsText.setText(graph.search());
             }
         });
     }

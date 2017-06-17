@@ -23,10 +23,7 @@ public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Ca
 
     public ViewPanel(Context context) {
         super(context);
-        Log.d("ViewPanel", "Created");
-
         surfaceHolder = getHolder();
-
         gameObjects = new ArrayList<>();
     }
 
@@ -91,7 +88,6 @@ public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Ca
 
             if (System.currentTimeMillis() - timer >= 1000) {
                 timer += 1000;
-                Log.d("Updates: " + updates, "Frames: " + frames + ",  " + canvas.isHardwareAccelerated());
                 frames = 0;
                 updates = 0;
             }

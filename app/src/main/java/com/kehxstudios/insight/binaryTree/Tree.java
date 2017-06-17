@@ -71,7 +71,7 @@ public class Tree implements GameObject {
     @Override
     public void update(float delta) {
         nodeTimer += delta;
-        if (nodeTimer > 1) {
+        if (nodeTimer > 0.5) {
             nodeTimer = 0;
             addValue(random.nextInt(100));
         }

@@ -6,15 +6,17 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.kehxstudios.insight.aStarPathfinding.AStarPathfindingActivity;
 import com.kehxstudios.insight.binaryTree.BinaryTreeActivity;
-import com.kehxstudios.insight.breadthFirstSearch.BreadthFirstSearch;
+import com.kehxstudios.insight.breadthFirstSearch.BreadthFirstSearchActivity;
+import com.kehxstudios.insight.evolutionarySteering.EvolutionarySteeringActivity;
 import com.kehxstudios.insight.login.LoginActivity;
+import com.kehxstudios.insight.mazeGenerator.MazeGeneratorActivity;
 import com.kehxstudios.insight.smartRockets.SmartRocketsActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,15 +35,24 @@ public class MainActivity extends AppCompatActivity {
         textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         Button binaryTreeButton = (Button) findViewById(R.id.binaryTreeButton);
-        Button smartRocketsButton = (Button) findViewById(R.id.smartRocketsButton);
         Button breadthFirstSearchButton = (Button) findViewById(R.id.breadthFirstSearchButton);
+        Button smartRocketsButton = (Button) findViewById(R.id.smartRocketsButton);
+        Button mazeGeneratorButton = (Button) findViewById(R.id.mazeGeneratorButton);
         Button loginButton = (Button) findViewById(R.id.loginButton);
-        Button restartButton = (Button) findViewById(R.id.restartButton);
+        Button aStarPathfinding = (Button) findViewById(R.id.aStarPathfindingButton);
+        Button evolutionarySteering = (Button) findViewById(R.id.evolutionarySteeringButton);
 
         binaryTreeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonSound.start();
                 startActivity(new Intent(getApplicationContext(), BinaryTreeActivity.class));
+            }
+        });
+
+        breadthFirstSearchButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                buttonSound.start();
+                startActivity(new Intent(getApplicationContext(), BreadthFirstSearchActivity.class));
             }
         });
 
@@ -52,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        breadthFirstSearchButton.setOnClickListener(new View.OnClickListener() {
+        mazeGeneratorButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonSound.start();
-                startActivity(new Intent(getApplicationContext(), BreadthFirstSearch.class));
+                startActivity(new Intent(getApplicationContext(), MazeGeneratorActivity.class));
             }
         });
 
@@ -66,11 +77,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        restartButton.setOnClickListener(new View.OnClickListener() {
+        aStarPathfinding.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonSound.start();
-                startActivity(new Intent(getApplicationContext(), IntroActivity.class));
-                finish();
+                startActivity(new Intent(getApplicationContext(), AStarPathfindingActivity.class));
+            }
+        });
+
+        evolutionarySteering.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                buttonSound.start();
+                startActivity(new Intent(getApplicationContext(), EvolutionarySteeringActivity.class));
             }
         });
 

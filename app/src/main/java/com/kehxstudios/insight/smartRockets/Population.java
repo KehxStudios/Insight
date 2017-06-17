@@ -32,6 +32,7 @@ public class Population implements GameObject {
 
     public float currentLifetime;
     public float geneUpdateTimer;
+    public float timePerGene;
     public int currentGene;
     public int generation;
     public int completeCount;
@@ -43,7 +44,7 @@ public class Population implements GameObject {
 
     public Vector2 target;
 
-    public Paint rocketPaint, targetPaint;
+    public Paint rocketPaint, targetPaint, barrierPaint;
 
     public Population(ViewPanel view, float width, float height) {
         this.view = view;
@@ -55,14 +56,15 @@ public class Population implements GameObject {
         generation = 0;
 
         DNA.geneRange = width/100;
-        DNA.geneCount = (int)populationLifetime;
+        DNA.geneCount = (int)populationLifetime * 5;
+        timePerGene = 1f/5f;
 
         target = new Vector2(width/2, height/10);
 
         randomRockets();
 
         barriers = new Barrier[1];
-        barriers[0] = new Barrier(width/2, height/2, width/2, height/20);
+        barriers[0] = new Barrier(width/2, height/3, width/3, height/40);
         view.addGameObject(this);
 
         rocketPaint = new Paint();
@@ -73,6 +75,10 @@ public class Population implements GameObject {
         targetPaint = new Paint();
         targetPaint.setColor(Color.BLUE);
         targetPaint.setStyle(Paint.Style.FILL);
+
+        barrierPaint = new Paint();
+        barrierPaint.setColor(Color.BLACK);
+        barrierPaint.setStyle(Paint.Style.FILL);
     }
 
 
@@ -139,14 +145,18 @@ public class Population implements GameObject {
                     rocket.position.x + rocketWidth/2, rocket.position.y + rocketHeight/2, rocketPaint);
             canvas.restore();
         }
+        for (Barrier barrier : barriers) {
+            canvas.drawRect(barrier.position.x - barrier.width/2, barrier.position.y - barrier.height/2,
+                    barrier.position.x + barrier.width/2, barrier.position.y + barrier.height/2, barrierPaint);
+        }
     }
 
     @Override
     public void update(float delta) {
         currentLifetime += delta;
         geneUpdateTimer += delta;
-        if (geneUpdateTimer >= 1) {
-            geneUpdateTimer--;
+        if (geneUpdateTimer >= timePerGene) {
+            geneUpdateTimer =- timePerGene;
             currentGene++;
 
             if (currentGene >= DNA.geneCount) {
@@ -168,7 +178,7 @@ public class Population implements GameObject {
                 if (!rocket.completed && !rocket.crashed) {
                     rocket.position.add(rocket.velocity);
                     Log.d("Rocket.position", "x: " + rocket.position.x + ", y: " + rocket.position.y);
-                    if (false) {
+                    if (barriers.length > 0) {
                         for (Barrier barrier : barriers) {
                             if (rocket.position.x > barrier.position.x - barrier.width / 2 &&
                                     rocket.position.x < barrier.position.x + barrier.width / 2 &&
@@ -202,7 +212,7 @@ public class Population implements GameObject {
 
     private void checkGeneration() {
         checkCompleted();
-        if (completeCount > 3) {
+        if (completeCount > populationSize/5) {
             restartGeneration();
         } else {
             nextGeneration();

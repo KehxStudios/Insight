@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/actor1Text"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/actor2Text"
@@ -27,7 +27,7 @@
         android:textSize="20dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/actor1Spinner"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="Enter the second Actor" />
 
     <Spinner
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/actor2Text"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/searchButton"
@@ -44,11 +44,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/actor2Spinner"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/colorPrimary"
         android:text="Search"
         android:textColor="@android:color/background_light"
         android:textSize="20dp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/breadth_resultsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textSize="15dp"
+        android:text="Results" />
 
 </RelativeLayout>

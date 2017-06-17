@@ -57,8 +57,6 @@ public class Rocket {
     }
 
     public float getAngle() {
-        Vector2 vel = new Vector2(velocity);
-        vel.normalize(-DNA.geneRange, DNA.geneRange);
         float angle = (float) Math.toDegrees(Math.atan2((double)velocity.y,(double)velocity.x));
         angle += 90;
         if(angle < 0){ angle += 360; }

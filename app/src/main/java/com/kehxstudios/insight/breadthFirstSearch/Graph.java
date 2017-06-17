@@ -15,10 +15,11 @@ public class Graph {
     public ArrayList<Node> actorNodes;
     private ArrayList<Node> queue;
 
+    private ArrayList<String> resultPath;
+
     public Graph() {
         movieNodes = new ArrayList<>();
         actorNodes = new ArrayList<>();
-        queue = new ArrayList<>();
         start = null;
         end = null;
     }
@@ -62,33 +63,7 @@ public class Graph {
         }
     }
 
-    public void search() {
-        if (start == null || end == null) {
-            Log.d("search", "start or end is null");
-            return;
-        }
-        Log.d("search", "Starting");
-        start.searched = true;
-        queue.add(start);
-
-        while(queue.size() > 0) {
-            Node current = queue.get(0);
-            if (current == end) {
-                Log.d("Search", "FOUND");
-                printSearchResults(current);
-                break;
-            } else {
-                Log.d("Search", "Checking " + current.value + ", edges size: " + current.edges.size());
-                for (int i = 0; i < current.edges.size(); i++) {
-                    if (!current.edges.get(i).searched) {
-                        current.edges.get(i).searched = true;
-                        current.edges.get(i).parent = current;
-                        queue.add(current.edges.get(i));
-                    }
-                }
-            }
-            queue.remove(current);
-        }
+    private void reset() {
         for (Node node : actorNodes) {
             node.parent = null;
             node.searched = false;
@@ -99,12 +74,47 @@ public class Graph {
         }
     }
 
-    public void printSearchResults(Node node) {
+    public String search() {
+        if (start == null || end == null || start == end) {
+            Log.d("search", "start or end is null or the same");
+            return "Error";
+        }
+        reset();
+        start.searched = true;
+        queue = new ArrayList<>();
+        queue.add(start);
+
+        while(queue.size() > 0) {
+            Node current = queue.get(0);
+            if (current == end) {
+                return printSearchResults(current);
+            } else {
+                for (int i = 0; i < current.edges.size(); i++) {
+                    if (!current.edges.get(i).searched) {
+                        current.edges.get(i).searched = true;
+                        current.edges.get(i).parent = current;
+                        queue.add(current.edges.get(i));
+                    }
+                }
+            }
+            queue.remove(current);
+        }
+        return "Not Found";
+    }
+
+
+    public String printSearchResults(Node node) {
+        resultPath = new ArrayList<>();
+        resultPath.add(0, node.value);
         Node current = node;
         while (current.parent != null) {
-            Log.d("results", current.value);
             current = current.parent;
+            resultPath.add(0, current.value);
         }
-        Log.d("result", current.value);
+        String result = "";
+        for (String path : resultPath) {
+            result += path + "\n";
+        }
+        return result;
     }
 }

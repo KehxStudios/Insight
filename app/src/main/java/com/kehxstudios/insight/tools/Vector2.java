@@ -33,6 +33,11 @@ public class Vector2 {
         y += vector.y;
     }
 
+    public void sub(Vector2 vector) {
+        x -= vector.x;
+        y -= vector.y;
+    }
+
     public void set(float x, float y) {
         this.x = x;
         this.y = y;
@@ -48,6 +53,11 @@ public class Vector2 {
         y = (y - min) / (max - min);
     }
 
+    public void scale(float scale) {
+        x *= scale;
+        y *= scale;
+    }
+
     public void limit(float limit) {
         if (x > limit) {
             x = limit;
@@ -59,5 +69,16 @@ public class Vector2 {
         } else if (y < -limit) {
             y = -limit;
         }
+    }
+
+    public static Vector2 getDirection(Vector2 start, Vector2 target) {
+        Vector2 direction = new Vector2(target);
+        direction.sub(start);
+        direction.normalize(1, -1);
+        return direction;
+    }
+
+    public float distance(Vector2 target) {
+        return (float)Math.sqrt((x - target.x)*(x - target.x) + (y - target.y)*(y - target.y));
     }
 }
