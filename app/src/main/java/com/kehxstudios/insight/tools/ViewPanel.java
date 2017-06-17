@@ -31,8 +31,8 @@ public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Ca
     }
 
     public void update(float delta) {
-        for (GameObject gameObject : gameObjects) {
-            gameObject.update(delta);
+        for (int i = 0; i < gameObjects.size(); i++) {
+            gameObjects.get(i).update(delta);
         }
     }
 

@@ -89,6 +89,14 @@ public class Graph {
             }
             queue.remove(current);
         }
+        for (Node node : actorNodes) {
+            node.parent = null;
+            node.searched = false;
+        }
+        for (Node node : movieNodes) {
+            node.parent = null;
+            node.searched = false;
+        }
     }
 
     public void printSearchResults(Node node) {

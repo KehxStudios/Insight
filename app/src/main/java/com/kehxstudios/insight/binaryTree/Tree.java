@@ -1,23 +1,40 @@
 package com.kehxstudios.insight.binaryTree;
 
+import android.graphics.Canvas;
+
+import com.kehxstudios.insight.tools.GameObject;
 import com.kehxstudios.insight.tools.ViewPanel;
+
+import java.util.Random;
 
 /**
  * Created by ReidC on 2017-06-10.
  */
 
-public class Tree {
+public class Tree implements GameObject {
 
     private ViewPanel view;
     private float width, height;
 
     public Node root;
 
+    private float nodeTimer;
+    private Random random;
+
     public Tree(ViewPanel view, float width, float height) {
         this.view = view;
         this.width = width;
         this.height = height;
         root = null;
+
+        nodeTimer = 0f;
+        random = new Random();
+
+        view.addGameObject(this);
+
+        addValue(50);
+        addValue(25);
+        addValue(75);
     }
 
     public void addValue(int value) {
@@ -43,6 +60,20 @@ public class Tree {
             return root.search(value);
         } else {
             return null;
+        }
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+
+    }
+
+    @Override
+    public void update(float delta) {
+        nodeTimer += delta;
+        if (nodeTimer > 1) {
+            nodeTimer = 0;
+            addValue(random.nextInt(100));
         }
     }
 }

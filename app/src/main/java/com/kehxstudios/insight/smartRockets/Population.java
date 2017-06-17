@@ -163,6 +163,7 @@ public class Population implements GameObject {
         }
         if (currentLifetime < populationLifetime) {
             Log.d("Update", "Begin_" + delta);
+            int movingCount = 0;
             for (Rocket rocket : rockets) {
                 if (!rocket.completed && !rocket.crashed) {
                     rocket.position.add(rocket.velocity);
@@ -185,22 +186,41 @@ public class Population implements GameObject {
                     }
 
                     rocket.checkTarget(target);
+                    if (!rocket.completed && !rocket.crashed) {
+                        movingCount++;
+                    }
                 }
             }
-        } else {
-            Log.d("Generation", "Next");
-            checkCompleted();
-            if (completeCount > 3) {
-                randomRockets();
-                generation++;
-            } else {
-                evaluate();
-                selection();
-                generation++;
+            if (movingCount == 0) {
+                checkGeneration();
             }
-            currentLifetime = 0f;
-            geneUpdateTimer = 0f;
+        } else {
+            checkGeneration();
         }
         Log.d("Update", "End");
+    }
+
+    private void checkGeneration() {
+        checkCompleted();
+        if (completeCount > 3) {
+            restartGeneration();
+        } else {
+            nextGeneration();
+        }
+    }
+
+    private void nextGeneration() {
+        evaluate();
+        selection();
+        generation++;
+        currentLifetime = 0f;
+        geneUpdateTimer = 0f;
+    }
+
+    private void restartGeneration() {
+        randomRockets();
+        generation = 0;
+        currentLifetime = 0f;
+        geneUpdateTimer = 0f;
     }
 }
