@@ -12,19 +12,28 @@ import java.util.ArrayList;
  * Created by ReidC on 2017-06-11.
  */
 
-public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Callback {
+public class GameView extends SurfaceView implements Runnable, SurfaceHolder.Callback {
 
-    Thread thread = null;
-    SurfaceHolder surfaceHolder;
-    boolean running = false;
-    final float UPS_TARGET = 30f;
+    private Thread thread = null;
+    private SurfaceHolder surfaceHolder;
+    private boolean running = false;
+    private float updatesPerSecond;
 
     private ArrayList<GameObject> gameObjects;
 
-    public ViewPanel(Context context) {
+    public GameView(Context context) {
         super(context);
+        updatesPerSecond = 30f;
         surfaceHolder = getHolder();
         gameObjects = new ArrayList<>();
+    }
+
+    public void setUpdatesPerSecond(float ups) {
+        if (ups >= 1f && ups < 1000f) {
+            updatesPerSecond = ups;
+        } else {
+            Log.e("GameView", "setting @updatesPerSecond to out or range value, " + ups);
+        }
     }
 
     public void update(float delta) {
@@ -65,7 +74,7 @@ public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Ca
     public void run() {
         long lastTime = System.nanoTime();
         long timer = System.currentTimeMillis();
-        final double ns = 1000000000 / UPS_TARGET;
+        final double ns = 1000000000 / updatesPerSecond;
         float delta = 0;
         int frames = 0;
         int updates = 0;
@@ -77,7 +86,7 @@ public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Ca
             delta += (now - lastTime) / ns;
             lastTime = now;
             while (delta >= 1) {
-                update(1/UPS_TARGET);
+                update(1/updatesPerSecond);
                 updates++;
                 delta--;
             }
@@ -87,6 +96,7 @@ public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Ca
             frames++;
 
             if (System.currentTimeMillis() - timer >= 1000) {
+                Log.d("GameView", "ups - " + updates +" | fps - " + frames);
                 timer += 1000;
                 frames = 0;
                 updates = 0;

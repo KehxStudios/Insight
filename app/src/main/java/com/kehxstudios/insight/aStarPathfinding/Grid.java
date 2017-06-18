@@ -6,9 +6,8 @@ import android.graphics.Paint;
 import android.util.Log;
 
 import com.kehxstudios.insight.tools.GameObject;
-import com.kehxstudios.insight.tools.ViewPanel;
+import com.kehxstudios.insight.tools.GameView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,7 +17,7 @@ import java.util.Random;
 
 public class Grid implements GameObject {
 
-    ViewPanel view;
+    GameView view;
     float width, height;
     int cols, rows;
     int nodeSize;
@@ -36,7 +35,7 @@ public class Grid implements GameObject {
 
     boolean finished;
 
-    public Grid(ViewPanel view, float width, float height) {
+    public Grid(GameView view, float width, float height) {
         this.view = view;
         this.width = width;
         this.height = height;

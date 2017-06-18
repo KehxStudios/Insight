@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.kehxstudios.insight.tools.GameObject;
 import com.kehxstudios.insight.tools.Vector2;
-import com.kehxstudios.insight.tools.ViewPanel;
+import com.kehxstudios.insight.tools.GameView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,7 +20,7 @@ public class Population implements GameObject {
 
     private static Random random = new Random();
 
-    public ViewPanel view;
+    public GameView view;
 
     public float rocketWidth = 50f;
     public float rocketHeight = 200f;
@@ -46,7 +46,7 @@ public class Population implements GameObject {
 
     public Paint rocketPaint, targetPaint, barrierPaint;
 
-    public Population(ViewPanel view, float width, float height) {
+    public Population(GameView view, float width, float height) {
         this.view = view;
         this.width = width;
         this.height = height;

@@ -3,7 +3,7 @@ package com.kehxstudios.insight.binaryTree;
 import android.graphics.Canvas;
 
 import com.kehxstudios.insight.tools.GameObject;
-import com.kehxstudios.insight.tools.ViewPanel;
+import com.kehxstudios.insight.tools.GameView;
 
 import java.util.Random;
 
@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class Tree implements GameObject {
 
-    private ViewPanel view;
+    private GameView view;
     private float width, height;
 
     public Node root;
@@ -21,7 +21,7 @@ public class Tree implements GameObject {
     private float nodeTimer;
     private Random random;
 
-    public Tree(ViewPanel view, float width, float height) {
+    public Tree(GameView view, float width, float height) {
         this.view = view;
         this.width = width;
         this.height = height;

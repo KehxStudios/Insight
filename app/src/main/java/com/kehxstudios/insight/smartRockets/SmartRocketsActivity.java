@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 
-import com.kehxstudios.insight.tools.ViewPanel;
+import com.kehxstudios.insight.tools.GameView;
 
 /**
  * Created by ReidC on 2017-06-13.
@@ -12,7 +12,7 @@ import com.kehxstudios.insight.tools.ViewPanel;
 
 public class SmartRocketsActivity extends AppCompatActivity {
 
-    public ViewPanel view;
+    public GameView view;
 
     public Population population;
 
@@ -20,7 +20,7 @@ public class SmartRocketsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
 
-        view = new ViewPanel(this);
+        view = new GameView(this);
         setContentView(view);
 
         DisplayMetrics metrics = new DisplayMetrics();

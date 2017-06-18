@@ -3,10 +3,8 @@ package com.kehxstudios.insight.evolutionarySteering;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.view.MotionEvent;
-import android.view.View;
 
-import com.kehxstudios.insight.tools.ViewPanel;
+import com.kehxstudios.insight.tools.GameView;
 
 /**
  * Created by ReidC on 2017-06-17.
@@ -14,7 +12,7 @@ import com.kehxstudios.insight.tools.ViewPanel;
 
 public class EvolutionarySteeringActivity extends AppCompatActivity {
 
-    public ViewPanel view;
+    public GameView view;
     public Map map;
 
     @Override
@@ -22,7 +20,7 @@ public class EvolutionarySteeringActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
 
-        view = new ViewPanel(this);
+        view = new GameView(this);
         setContentView(view);
 
         DisplayMetrics metrics = new DisplayMetrics();

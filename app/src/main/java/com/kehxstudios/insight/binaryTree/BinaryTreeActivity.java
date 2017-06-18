@@ -4,13 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
-import com.kehxstudios.insight.tools.ViewPanel;
-
-import java.util.Random;
+import com.kehxstudios.insight.tools.GameView;
 
 public class BinaryTreeActivity extends AppCompatActivity {
 
-    public ViewPanel view;
+    public GameView view;
     public Tree tree;
 
     @Override
@@ -18,7 +16,7 @@ public class BinaryTreeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
 
-        view = new ViewPanel(this);
+        view = new GameView(this);
         setContentView(view);
 
         generateTree();

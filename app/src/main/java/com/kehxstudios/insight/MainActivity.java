@@ -18,6 +18,8 @@ import com.kehxstudios.insight.evolutionarySteering.EvolutionarySteeringActivity
 import com.kehxstudios.insight.login.LoginActivity;
 import com.kehxstudios.insight.mazeGenerator.MazeGeneratorActivity;
 import com.kehxstudios.insight.smartRockets.SmartRocketsActivity;
+import com.kehxstudios.insight.starfield.StarfieldActivity;
+import com.kehxstudios.insight.terrainGeneration.TerrainGenerationActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         Button loginButton = (Button) findViewById(R.id.loginButton);
         Button aStarPathfinding = (Button) findViewById(R.id.aStarPathfindingButton);
         Button evolutionarySteering = (Button) findViewById(R.id.evolutionarySteeringButton);
+        Button starfield = (Button) findViewById(R.id.starfieldButton);
+        Button terrainGeneration = (Button) findViewById(R.id.terrainGenerationButton);
 
         binaryTreeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -90,6 +94,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), EvolutionarySteeringActivity.class));
             }
         });
+
+        starfield.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                buttonSound.start();
+                startActivity(new Intent(getApplicationContext(), StarfieldActivity.class));
+            }
+        });
+
+        terrainGeneration.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                buttonSound.start();
+                startActivity(new Intent(getApplicationContext(), TerrainGenerationActivity.class));
+            }
+        });
+
+
 
         ImageButton facebookButton = (ImageButton) findViewById(R.id.facebookButton);
         ImageButton twitterButton = (ImageButton) findViewById(R.id.twitterButton);
