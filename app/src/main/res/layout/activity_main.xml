@@ -139,6 +139,18 @@
                 android:textSize="15dp"
                 android:textColor="@android:color/background_light" />
 
+            <Button
+                android:id="@+id/perceptronButton"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/terrainGenerationButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Perceptron"
+                android:textSize="15dp"
+                android:textColor="@android:color/background_light" />
+
         </RelativeLayout>
     </ScrollView>
 

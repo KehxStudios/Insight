@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="true">
-        <activity android:name=".IntroActivity">
+        <activity android:name=".intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".mainMenu.MainMenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -92,6 +92,14 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.LOGIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".perceptron.PerceptronActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.PERCEPTRON" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
