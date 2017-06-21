@@ -20,7 +20,7 @@
 package com.kehxstudios.insight.perceptron;
 
 /**
- * Created by ReidC on 2017-06-19.
+ *
  */
 
 public class Point {

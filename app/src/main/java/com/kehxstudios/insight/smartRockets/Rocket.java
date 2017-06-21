@@ -19,12 +19,10 @@
 
 package com.kehxstudios.insight.smartRockets;
 
-import android.util.Log;
-
 import com.kehxstudios.insight.tools.Vector2;
 
 /**
- * Created by ReidC on 2017-06-13.
+ *
  */
 
 public class Rocket {

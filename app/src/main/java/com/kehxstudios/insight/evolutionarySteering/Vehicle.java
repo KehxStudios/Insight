@@ -19,12 +19,13 @@
 
 package com.kehxstudios.insight.evolutionarySteering;
 
+import com.kehxstudios.insight.tools.Tools;
 import com.kehxstudios.insight.tools.Vector2;
 
 import java.util.Random;
 
 /**
- * Created by ReidC on 2017-06-17.
+ *
  */
 
 public class Vehicle {
@@ -42,10 +43,10 @@ public class Vehicle {
         velocity = new Vector2();
         health = 1f;
         dna = new float[4];
-        dna[0] = random.nextFloat() * 4 - 2;
-        dna[1] = random.nextFloat() * 4 - 2;
-        dna[2] = random.nextFloat() * width/6 + width/10;
-        dna[3] = random.nextFloat() * width/6 + width/10;
+        dna[0] = Tools.randomRange(random, -2, 2);
+        dna[1] = Tools.randomRange(random, -2, 2);
+        dna[2] = Tools.randomRange(random, width/10, width/5);
+        dna[3] = Tools.randomRange(random, width/10, width/5);
     }
 
     public Vehicle(float x, float y, float[] dna) {

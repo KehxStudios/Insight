@@ -32,7 +32,7 @@ import com.kehxstudios.insight.mainMenu.MainMenuActivity;
 import com.kehxstudios.insight.R;
 
 /**
- * Created by ReidC on 2017-06-11.
+ *
  */
 
 public class IntroActivity extends AppCompatActivity {

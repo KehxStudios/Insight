@@ -28,7 +28,7 @@ import android.view.SurfaceView;
 import java.util.ArrayList;
 
 /**
- * Created by ReidC on 2017-06-11.
+ *
  */
 
 public class GameView extends SurfaceView implements Runnable, SurfaceHolder.Callback {

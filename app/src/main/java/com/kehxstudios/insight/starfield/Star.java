@@ -22,7 +22,7 @@ package com.kehxstudios.insight.starfield;
 import com.kehxstudios.insight.tools.Vector2;
 
 /**
- * Created by ReidC on 2017-06-18.
+ *
  */
 
 public class Star {

@@ -20,7 +20,7 @@
 package com.kehxstudios.insight.gameOfLife;
 
 /**
- * Created by ReidC on 2017-06-20.
+ *
  */
 
 public class Cell {

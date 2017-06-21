@@ -22,7 +22,7 @@ package com.kehxstudios.insight.tools;
 import java.util.Random;
 
 /**
- * Created by ReidC on 2017-06-19.
+ *
  */
 
 public class Tools {

@@ -19,10 +19,8 @@
 
 package com.kehxstudios.insight.tools;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
+import android.graphics.Canvas;
+import android.view.MotionEvent;
 
 import java.util.Random;
 
@@ -30,41 +28,34 @@ import java.util.Random;
  *
  */
 
-public abstract class GameActivity extends AppCompatActivity {
+public abstract class GameControl implements GameObject {
 
-    protected GameView gameView;
-    protected GameControl gameControl;
-    protected float width, height;
+    protected GameActivity gameActivity;
+    protected float width, height, runningTime;
+    protected Random random;
+    protected boolean debugMode;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        gameView = new GameView(this);
-        setContentView(gameView);
-
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-        width = metrics.widthPixels;
-        height = metrics.heightPixels;
+    public GameControl(GameActivity gameActivity, float width, float height) {
+        this.gameActivity = gameActivity;
+        this.width = width;
+        this.height = height;
+        runningTime = 0f;
+        random = new Random();
+        debugMode = false;
+        createPaints();
     }
 
+
     @Override
-    protected void onPause() {
-        super.onPause();
-        gameView.pause();
+    public void update(float delta) {
+        runningTime += delta;
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        gameView.resume();
+    public void draw(Canvas canvas) {
+
     }
 
-    public void setUpdatesPerSecond(float ups) {
-        gameView.setUpdatesPerSecond(ups);
-    }
+    public abstract boolean onTouchEvent(MotionEvent event);
+    protected abstract void createPaints();
 }

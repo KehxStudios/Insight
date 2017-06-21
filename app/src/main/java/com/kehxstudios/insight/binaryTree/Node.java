@@ -22,7 +22,7 @@ package com.kehxstudios.insight.binaryTree;
 import android.util.Log;
 
 /**
- * Created by ReidC on 2017-06-10.
+ *
  */
 
 public class Node {

@@ -42,6 +42,10 @@ import com.kehxstudios.insight.perceptron.PerceptronActivity;
 import com.kehxstudios.insight.smartRockets.SmartRocketsActivity;
 import com.kehxstudios.insight.starfield.StarfieldActivity;
 
+/**
+ *
+ */
+
 public class MainMenuActivity extends AppCompatActivity {
 
     private MediaPlayer buttonSound;

@@ -20,7 +20,7 @@
 package com.kehxstudios.insight.tools;
 
 /**
- * Created by ReidC on 2017-06-13.
+ *
  */
 
 public class Vector2 {

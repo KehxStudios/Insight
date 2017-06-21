@@ -20,7 +20,7 @@
 package com.kehxstudios.insight.mazeGenerator;
 
 /**
- * Created by ReidC on 2017-06-17.
+ *
  */
 
 public class Cell {

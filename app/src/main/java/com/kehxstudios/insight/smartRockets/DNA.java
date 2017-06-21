@@ -24,7 +24,7 @@ import com.kehxstudios.insight.tools.Vector2;
 import java.util.Random;
 
 /**
- * Created by ReidC on 2017-06-13.
+ *
  */
 
 public class DNA {

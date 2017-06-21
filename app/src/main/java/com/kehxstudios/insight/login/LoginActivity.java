@@ -33,7 +33,7 @@ import android.widget.ViewFlipper;
 import com.kehxstudios.insight.R;
 
 /**
- * Created by ReidC on 2017-06-14.
+ *
  */
 
 public class LoginActivity extends AppCompatActivity {

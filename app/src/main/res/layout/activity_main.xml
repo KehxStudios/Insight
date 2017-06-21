@@ -32,27 +32,15 @@
             android:layout_height="match_parent" >
 
             <Button
-                android:id="@+id/binaryTreeButton"
+                android:id="@+id/evolutionarySteeringButton"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="0dp"
+                android:layout_centerHorizontal="true"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="Binary Tree"
-                android:textColor="@android:color/background_light"
-                android:textSize="15dp" />
-
-            <Button
-                android:id="@+id/breadthFirstSearchButton"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Breadth-First Search"
+                android:text="Evolutionary Steering"
                 android:textSize="15dp"
-                android:textColor="@android:color/background_light"
-                android:layout_marginTop="8dp"
-                android:layout_below="@+id/binaryTreeButton"
-                android:layout_centerHorizontal="true"/>
+                android:textColor="@android:color/background_light" />
 
             <Button
                 android:id="@+id/smartRocketsButton"
@@ -63,75 +51,14 @@
                 android:textSize="15dp"
                 android:textColor="@android:color/background_light"
                 android:layout_marginTop="8dp"
-                android:layout_below="@+id/breadthFirstSearchButton"
-                android:layout_centerHorizontal="true"/>
-
-            <Button
-                android:id="@+id/mazeGeneratorButton"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Maze Generator"
-                android:textSize="15dp"
-                android:textColor="@android:color/background_light"
-                android:layout_marginTop="8dp"
-                android:layout_below="@+id/smartRocketsButton"
-                android:layout_centerHorizontal="true"/>
-
-            <Button
-                android:id="@+id/loginButton"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/mazeGeneratorButton"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Login"
-                android:textColor="@android:color/background_light"
-                android:textSize="15dp" />
-
-
-            <Button
-                android:id="@+id/aStarPathfindingButton"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/loginButton"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="A* Pathfinding"
-                android:textSize="15dp"
-                android:textColor="@android:color/background_light" />
-
-            <Button
-                android:id="@+id/evolutionarySteeringButton"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/aStarPathfindingButton"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Evolutionary Steering"
-                android:textSize="15dp"
-                android:textColor="@android:color/background_light" />
-
-            <Button
-                android:id="@+id/starfieldButton"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
                 android:layout_below="@+id/evolutionarySteeringButton"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Starfield"
-                android:textSize="15dp"
-                android:textColor="@android:color/background_light" />
+                android:layout_centerHorizontal="true"/>
 
             <Button
                 android:id="@+id/gameOfLifeButton"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/starfieldButton"
+                android:layout_below="@+id/smartRocketsButton"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorPrimary"
@@ -150,6 +77,77 @@
                 android:text="Perceptron"
                 android:textSize="15dp"
                 android:textColor="@android:color/background_light" />
+
+            <Button
+                android:id="@+id/mazeGeneratorButton"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Maze Generator"
+                android:textSize="15dp"
+                android:textColor="@android:color/background_light"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/perceptronButton"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/starfieldButton"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mazeGeneratorButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Starfield"
+                android:textSize="15dp"
+                android:textColor="@android:color/background_light" />
+
+            <Button
+                android:id="@+id/aStarPathfindingButton"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/starfieldButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="A* Pathfinding"
+                android:textSize="15dp"
+                android:textColor="@android:color/background_light" />
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/aStarPathfindingButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Login"
+                android:textColor="@android:color/background_light"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/breadthFirstSearchButton"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Breadth-First Search"
+                android:textSize="15dp"
+                android:textColor="@android:color/background_light"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/loginButton"
+                android:layout_centerHorizontal="true"/>
+            <Button
+                android:id="@+id/binaryTreeButton"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/breadthFirstSearchButton"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Binary Tree"
+                android:textColor="@android:color/background_light"
+                android:textSize="15dp" />
 
         </RelativeLayout>
     </ScrollView>

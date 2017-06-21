@@ -22,7 +22,7 @@ package com.kehxstudios.insight.breadthFirstSearch;
 import java.util.ArrayList;
 
 /**
- * Created by ReidC on 2017-06-12.
+ *
  */
 
 public class Node {
