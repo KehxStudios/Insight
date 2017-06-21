@@ -54,7 +54,7 @@ public class AStarPathfindingActivity extends GameActivity {
         cols = (int)(width/nodeSize);
         rows = (int)(height/nodeSize) - 1;
         finished = false;
-        allowDiagonal = true;
+        allowDiagonal = false;
         updateTimer = -1f;
         updateTime = 1f;
 

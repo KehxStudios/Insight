@@ -17,22 +17,25 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-package com.kehxstudios.insight.tools;
-
-import java.util.Random;
+package com.kehxstudios.insight.gameOfLife;
 
 /**
- * Created by ReidC on 2017-06-19.
+ * Created by ReidC on 2017-06-20.
  */
 
-public class Tools {
+public class Cell {
 
-    public static float map(float value, float inMin, float inMax, float outMin, float outMax) {
-        return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    public float x, y;
+    public boolean state, newState;
+
+    public Cell(float x, float y) {
+        this.x = x;
+        this.y = y;
+        state = false;
+        newState = false;
     }
 
-    public static float randomRange(Random random, float min, float max) {
-        float range = max - min;
-        return random.nextFloat() * range + min;
+    public void updateState() {
+        state = newState;
     }
 }

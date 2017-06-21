@@ -80,10 +80,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".terrainGeneration.TerrainGenerationActivity"
+        <activity android:name=".gameOfLife.GameOfLifeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.TERRAIN_GENERATION" />
+                <action android:name="android.intent.action.GAME_OF_LIFE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

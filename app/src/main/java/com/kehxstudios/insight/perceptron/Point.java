@@ -17,22 +17,20 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-package com.kehxstudios.insight.tools;
-
-import java.util.Random;
+package com.kehxstudios.insight.perceptron;
 
 /**
  * Created by ReidC on 2017-06-19.
  */
 
-public class Tools {
+public class Point {
 
-    public static float map(float value, float inMin, float inMax, float outMin, float outMax) {
-        return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-    }
+    float x, y;
+    int label;
+    boolean correct;
 
-    public static float randomRange(Random random, float min, float max) {
-        float range = max - min;
-        return random.nextFloat() * range + min;
+    public Point(float x, float y) {
+        this.x = x;
+        this.y = y;
     }
 }

@@ -22,6 +22,7 @@ package com.kehxstudios.insight.tools;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import java.util.Random;
 
@@ -40,6 +41,7 @@ public abstract class GameActivity extends AppCompatActivity implements GameObje
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         gameView = new GameView(this);
         gameView.addGameObject(this);

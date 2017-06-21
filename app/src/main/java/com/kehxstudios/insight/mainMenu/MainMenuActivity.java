@@ -35,12 +35,12 @@ import com.kehxstudios.insight.aStarPathfinding.AStarPathfindingActivity;
 import com.kehxstudios.insight.binaryTree.BinaryTreeActivity;
 import com.kehxstudios.insight.breadthFirstSearch.BreadthFirstSearchActivity;
 import com.kehxstudios.insight.evolutionarySteering.EvolutionarySteeringActivity;
+import com.kehxstudios.insight.gameOfLife.GameOfLifeActivity;
 import com.kehxstudios.insight.login.LoginActivity;
 import com.kehxstudios.insight.mazeGenerator.MazeGeneratorActivity;
 import com.kehxstudios.insight.perceptron.PerceptronActivity;
 import com.kehxstudios.insight.smartRockets.SmartRocketsActivity;
 import com.kehxstudios.insight.starfield.StarfieldActivity;
-import com.kehxstudios.insight.terrainGeneration.TerrainGenerationActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -65,7 +65,7 @@ public class MainMenuActivity extends AppCompatActivity {
         Button aStarPathfinding = (Button) findViewById(R.id.aStarPathfindingButton);
         Button evolutionarySteering = (Button) findViewById(R.id.evolutionarySteeringButton);
         Button starfield = (Button) findViewById(R.id.starfieldButton);
-        Button terrainGeneration = (Button) findViewById(R.id.terrainGenerationButton);
+        Button gameOfLife = (Button) findViewById(R.id.gameOfLifeButton);
         Button perceptron = (Button) findViewById(R.id.perceptronButton);
 
         binaryTreeButton.setOnClickListener(new View.OnClickListener() {
@@ -124,10 +124,10 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        terrainGeneration.setOnClickListener(new View.OnClickListener() {
+        gameOfLife.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonSound.start();
-                startActivity(new Intent(getApplicationContext(), TerrainGenerationActivity.class));
+                startActivity(new Intent(getApplicationContext(), GameOfLifeActivity.class));
             }
         });
 

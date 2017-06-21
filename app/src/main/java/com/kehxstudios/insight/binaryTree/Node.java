@@ -74,7 +74,7 @@ public class Node {
         if (left != null) {
             left.visit();
         }
-        Log.d("Node", value+"");
+        Log.d("Point", value+"");
         if (right != null) {
             right.visit();
         }

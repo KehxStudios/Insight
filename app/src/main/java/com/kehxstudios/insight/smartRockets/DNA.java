@@ -53,18 +53,20 @@ public class DNA {
     }
 
     public DNA crossOver(DNA dna) {
-        Vector2[] child = new Vector2[geneCount];
+        Vector2[] childGenes = new Vector2[geneCount];
         for (int i = 0; i < geneCount; i++) {
             if (random.nextFloat() > 0.5f) {
-                child[i] = genes[i];
+                childGenes[i] = genes[i];
             } else {
-                child[i] = dna.genes[i];
+                childGenes[i] = dna.genes[i];
             }
         }
-        return new DNA(child);
+        DNA child = new DNA(childGenes);
+        child.mutation();
+        return child;
     }
 
-    public void mutation() {
+    private void mutation() {
         for (int i = 0; i < geneCount; i++) {
             if (random.nextFloat() < mutationRate) {
                 genes[i] = randomGene();
@@ -72,12 +74,12 @@ public class DNA {
         }
     }
 
-    public Vector2 randomGene() {
+    private Vector2 randomGene() {
         return new Vector2(random.nextFloat() * geneRange * 2 - geneRange,
                 random.nextFloat() * geneRange * 2 - geneRange);
     }
 
-    public Vector2 perlinGene(Vector2 previousGene) {
+    private Vector2 perlinGene(Vector2 previousGene) {
         return new Vector2(previousGene.x - geneRange / 2 + random.nextFloat() * geneRange,
                 previousGene.y - geneRange / 2 + random.nextFloat() * geneRange);
     }

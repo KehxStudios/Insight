@@ -40,12 +40,6 @@ public class StarfieldActivity extends GameActivity {
     private Paint backgroundPaint, starPaint;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    }
-
-    @Override
     protected void init() {
         starSpeed = 40f;
         starCount = 1000f;

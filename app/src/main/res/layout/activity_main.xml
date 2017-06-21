@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kehxstudios.insight.MainActivity">
+    tools:context="com.kehxstudios.insight.mainMenu.MainMenuActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -128,14 +128,14 @@
                 android:textColor="@android:color/background_light" />
 
             <Button
-                android:id="@+id/terrainGenerationButton"
+                android:id="@+id/gameOfLifeButton"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/starfieldButton"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="Terrain Generation"
+                android:text="Game of Life"
                 android:textSize="15dp"
                 android:textColor="@android:color/background_light" />
 
@@ -143,7 +143,7 @@
                 android:id="@+id/perceptronButton"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/terrainGenerationButton"
+                android:layout_below="@+id/gameOfLifeButton"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorPrimary"

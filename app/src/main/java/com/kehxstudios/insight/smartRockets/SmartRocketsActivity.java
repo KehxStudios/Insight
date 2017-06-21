@@ -22,7 +22,9 @@ package com.kehxstudios.insight.smartRockets;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.kehxstudios.insight.tools.GameActivity;
 import com.kehxstudios.insight.tools.Vector2;
@@ -44,7 +46,7 @@ public class SmartRocketsActivity extends GameActivity {
     public float currentLifetime;
     public float geneUpdateTimer;
     public float timePerGene;
-    public int currentGene;
+    public int currentGene, totalGenes;
     public int generation;
     public int completeCount;
 
@@ -66,6 +68,7 @@ public class SmartRocketsActivity extends GameActivity {
 
         DNA.geneRange = width/100;
         DNA.geneCount = (int)populationLifetime * 5;
+        totalGenes = DNA.geneCount;
         timePerGene = 1f/5f;
 
         target = new Vector2(width/2, height/10);
@@ -85,7 +88,7 @@ public class SmartRocketsActivity extends GameActivity {
         float maxFit = 0f;
 
         for (int i = 0; i < rockets.length; i++) {
-            rockets[i].calculateFitness();
+            calculateFitness(rockets[i]);
             if (rockets[i].fitness > maxFit) {
                 maxFit = rockets[i].fitness;
             }
@@ -111,7 +114,6 @@ public class SmartRocketsActivity extends GameActivity {
                 parentB = matingPool.get(random.nextInt(matingPool.size() - 1)).dna;
             }
             DNA child = parentA.crossOver(parentB);
-            child.mutation();
             rockets[i] = new Rocket(child, width/2, height/5*4);
         }
     }
@@ -125,12 +127,10 @@ public class SmartRocketsActivity extends GameActivity {
         }
     }
 
-
     public void randomRockets() {
         rockets = new Rocket[populationSize];
         for (int i = 0; i < rockets.length; i++) {
             rockets[i] = new Rocket(new DNA(), width/2, height/5*4);
-            Log.d("Rocket.position", "x: " + rockets[i].position.x + ", y: " + rockets[i].position.y);
         }
     }
 
@@ -148,6 +148,8 @@ public class SmartRocketsActivity extends GameActivity {
             canvas.drawRect(barrier.position.x - barrier.width/2, barrier.position.y - barrier.height/2,
                     barrier.position.x + barrier.width/2, barrier.position.y + barrier.height/2, barrierPaint);
         }
+        canvas.drawText("Generation: " + generation, width/2, 80, barrierPaint);
+        canvas.drawText("Time: " + String.format("%.2f", currentLifetime), width/2, 160, barrierPaint);
     }
 
     @Override
@@ -171,12 +173,10 @@ public class SmartRocketsActivity extends GameActivity {
             }
         }
         if (currentLifetime < populationLifetime) {
-            Log.d("Update", "Begin_" + delta);
             int movingCount = 0;
             for (Rocket rocket : rockets) {
                 if (!rocket.completed && !rocket.crashed) {
                     rocket.position.add(rocket.velocity);
-                    Log.d("Rocket.position", "x: " + rocket.position.x + ", y: " + rocket.position.y);
                     if (barriers.length > 0) {
                         for (Barrier barrier : barriers) {
                             if (rocket.position.x > barrier.position.x - barrier.width / 2 &&
@@ -194,7 +194,7 @@ public class SmartRocketsActivity extends GameActivity {
                         rocket.crashed = true;
                     }
 
-                    rocket.checkTarget(target);
+                    rocket.checkTarget(target, currentGene);
                     if (!rocket.completed && !rocket.crashed) {
                         movingCount++;
                     }
@@ -206,12 +206,31 @@ public class SmartRocketsActivity extends GameActivity {
         } else {
             checkGeneration();
         }
-        Log.d("Update", "End");
     }
+
+    private void calculateFitness(Rocket rocket) {
+        rocket.fitness = (1 / rocket.closest * 10000);
+        if (rocket.completed) {
+            String log = "COMPLETE\t" + String.format("%.0f", rocket.closest) + " \t" + String.format("%.2f", rocket.fitness) + "\t";
+            rocket.fitness += (totalGenes - rocket.completedGene) / 200;
+            rocket.fitness /= 3;
+            Log.d("Rocket", log + String.format("%.2f", rocket.fitness));
+        } else if (rocket.crashed) {
+            String log = "CRASHED\t" + String.format("%.0f", rocket.closest) + " \t" + String.format("%.2f", rocket.fitness) + "\t";
+            rocket.fitness /= 10;
+            Log.d("Rocket", log + String.format("%.2f", rocket.fitness));
+        } else {
+            String log = "REMAINING\t" + String.format("%.0f", rocket.closest) + " \t" + String.format("%.2f", rocket.fitness) + "\t";
+            rocket.fitness += (rocket.closest % (totalGenes - rocket.closestGene)) / 1000;
+            rocket.fitness /= 5;
+            Log.d("Rocket", log + String.format("%.2f", rocket.fitness));
+        }
+    }
+
 
     private void checkGeneration() {
         checkCompleted();
-        if (completeCount > populationSize/5) {
+        if (completeCount > populationSize/10) {
             restartGeneration();
         } else {
             nextGeneration();
@@ -248,5 +267,7 @@ public class SmartRocketsActivity extends GameActivity {
         barrierPaint = new Paint();
         barrierPaint.setColor(Color.BLACK);
         barrierPaint.setStyle(Paint.Style.FILL);
+        barrierPaint.setTextAlign(Paint.Align.CENTER);
+        barrierPaint.setTextSize(80f);
     }
 }

@@ -59,9 +59,9 @@ public class Vehicle {
 
     private void mutate() {
         if (random.nextFloat() < 0.2)
-            dna[0] += random.nextFloat() * 0.5 - 0.25;
+            dna[0] += random.nextFloat() - 0.5;
         if (random.nextFloat() < 0.2)
-            dna[1] += random.nextFloat() * 0.5 - 0.25;
+            dna[1] += random.nextFloat() - 0.5;
         if (random.nextFloat() < 0.2)
             dna[2] += random.nextFloat() * 10 - 5;
         if (random.nextFloat() < 0.2)
