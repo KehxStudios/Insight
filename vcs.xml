@@ -10,6 +10,10 @@
           <option name="url" value="https://github.com/KehxStudios/Insight.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://Christopher404@bitbucket.org/gwally/android_front_end.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="C:\Users\ReidC\Desktop\Android_Studios_x86\Projects" />
