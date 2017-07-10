@@ -1,17 +1,31 @@
+/*******************************************************************************
+ * Copyright 2017 See AUTHORS file.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+ * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ ******************************************************************************/
+
 package com.kehxstudios.insight.binaryTree;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.Log;
 
-import com.kehxstudios.insight.tools.GameObject;
-
 /**
- * Created by ReidC on 2017-06-10.
+ *
  */
 
-public class Node implements GameObject {
+public class Node {
 
     public int value;
     public float x, y;
@@ -20,8 +34,6 @@ public class Node implements GameObject {
     public Node left;
     public Node right;
 
-    private Paint paint, textPaint, branchPaint;
-
     public Node(int value, float x, float y) {
         this.value = value;
         this.x = x;
@@ -29,21 +41,6 @@ public class Node implements GameObject {
         count = 1;
         left = null;
         right = null;
-
-        paint = new Paint();
-        paint.setColor(Color.rgb(30,91,19));
-        paint.setStyle(Paint.Style.FILL);
-
-        textPaint = new Paint();
-        textPaint.setColor(Color.WHITE);
-        textPaint.setTextSize(80f);
-        textPaint.setFakeBoldText(true);
-        textPaint.setTextAlign(Paint.Align.CENTER);
-
-        branchPaint = new Paint();
-        branchPaint.setColor(Color.rgb(139,69,19));
-        branchPaint.setStyle(Paint.Style.STROKE);
-        branchPaint.setStrokeWidth(20f);
     }
 
     public void addNode(Node node) {
@@ -77,7 +74,7 @@ public class Node implements GameObject {
         if (left != null) {
             left.visit();
         }
-        Log.d("Node", value+"");
+        Log.d("Point", value+"");
         if (right != null) {
             right.visit();
         }
@@ -93,22 +90,5 @@ public class Node implements GameObject {
         } else {
             return null;
         }
-    }
-
-    @Override
-    public void draw(Canvas canvas) {
-        if (left != null) {
-            canvas.drawLine(x, y, left.x, left.y, branchPaint);
-        }
-        if (right != null) {
-            canvas.drawLine(x, y, right.x, right.y, branchPaint);
-        }
-        canvas.drawCircle(x, y, 70, paint);
-        canvas.drawText(value+"", x, y+30, textPaint);
-    }
-
-    @Override
-    public void update(float delta) {
-
     }
 }

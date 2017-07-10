@@ -17,52 +17,45 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-package com.kehxstudios.insight.smartRockets;
+package com.kehxstudios.insight.tools;
 
-import com.kehxstudios.insight.tools.Vector2;
+import android.graphics.Canvas;
+import android.view.MotionEvent;
+
+import java.util.Random;
 
 /**
  *
  */
 
-public class Rocket {
+public abstract class GameControl implements GameObject {
 
-    public static final float maxVelocity = DNA.geneRange;
+    protected GameActivity gameActivity;
+    protected float width, height, runningTime;
+    protected Random random;
+    protected boolean debugMode;
 
-    public Vector2 position, acceleration, velocity;
-    public DNA dna;
-    public float fitness, closest;
-    public int closestGene, completedGene;
-    public boolean completed, crashed;
-
-    public Rocket(DNA dna, float x, float y) {
-        this.dna = dna;
-        position = new Vector2(x, y);
-        acceleration = new Vector2();
-        velocity = new Vector2();
-        fitness = 0f;
-        closest = 10000f;
-        closestGene = 0;
-        completedGene = 0;
-        completed = false;
-        crashed = false;
+    public GameControl(GameActivity gameActivity, float width, float height) {
+        this.gameActivity = gameActivity;
+        this.width = width;
+        this.height = height;
+        runningTime = 0f;
+        random = new Random();
+        debugMode = false;
+        createPaints();
     }
 
-    public void checkTarget(Vector2 target, int currentGene) {
-        float distance = position.distance(target);
-        if (distance < 50) {
-            position.set(target.x, target.y);
-            completed = true;
-        } else if (distance < closest) {
-            closest = distance;
-            closestGene = currentGene;
-        }
+
+    @Override
+    public void update(float delta) {
+        runningTime += delta;
     }
 
-    public float getAngle() {
-        float angle = (float) Math.toDegrees(Math.atan2((double)velocity.y,(double)velocity.x));
-        angle += 90;
-        if(angle < 0){ angle += 360; }
-        return angle;
+    @Override
+    public void draw(Canvas canvas) {
+
     }
+
+    public abstract boolean onTouchEvent(MotionEvent event);
+    protected abstract void createPaints();
 }

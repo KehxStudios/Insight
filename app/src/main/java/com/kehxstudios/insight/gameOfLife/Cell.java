@@ -17,52 +17,25 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-package com.kehxstudios.insight.smartRockets;
-
-import com.kehxstudios.insight.tools.Vector2;
+package com.kehxstudios.insight.gameOfLife;
 
 /**
  *
  */
 
-public class Rocket {
+public class Cell {
 
-    public static final float maxVelocity = DNA.geneRange;
+    public float x, y;
+    public boolean state, newState;
 
-    public Vector2 position, acceleration, velocity;
-    public DNA dna;
-    public float fitness, closest;
-    public int closestGene, completedGene;
-    public boolean completed, crashed;
-
-    public Rocket(DNA dna, float x, float y) {
-        this.dna = dna;
-        position = new Vector2(x, y);
-        acceleration = new Vector2();
-        velocity = new Vector2();
-        fitness = 0f;
-        closest = 10000f;
-        closestGene = 0;
-        completedGene = 0;
-        completed = false;
-        crashed = false;
+    public Cell(float x, float y) {
+        this.x = x;
+        this.y = y;
+        state = false;
+        newState = false;
     }
 
-    public void checkTarget(Vector2 target, int currentGene) {
-        float distance = position.distance(target);
-        if (distance < 50) {
-            position.set(target.x, target.y);
-            completed = true;
-        } else if (distance < closest) {
-            closest = distance;
-            closestGene = currentGene;
-        }
-    }
-
-    public float getAngle() {
-        float angle = (float) Math.toDegrees(Math.atan2((double)velocity.y,(double)velocity.x));
-        angle += 90;
-        if(angle < 0){ angle += 360; }
-        return angle;
+    public void updateState() {
+        state = newState;
     }
 }

@@ -17,52 +17,28 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-package com.kehxstudios.insight.smartRockets;
+package com.kehxstudios.insight.starfield;
 
-import com.kehxstudios.insight.tools.Vector2;
+import android.os.Bundle;
+import android.view.MotionEvent;
+
+import com.kehxstudios.insight.tools.GameActivity;
 
 /**
  *
  */
 
-public class Rocket {
+public class StarfieldActivity extends GameActivity {
 
-    public static final float maxVelocity = DNA.geneRange;
-
-    public Vector2 position, acceleration, velocity;
-    public DNA dna;
-    public float fitness, closest;
-    public int closestGene, completedGene;
-    public boolean completed, crashed;
-
-    public Rocket(DNA dna, float x, float y) {
-        this.dna = dna;
-        position = new Vector2(x, y);
-        acceleration = new Vector2();
-        velocity = new Vector2();
-        fitness = 0f;
-        closest = 10000f;
-        closestGene = 0;
-        completedGene = 0;
-        completed = false;
-        crashed = false;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        gameControl = new Map(this, width, height);
+        gameView.addGameObject(gameControl);
     }
 
-    public void checkTarget(Vector2 target, int currentGene) {
-        float distance = position.distance(target);
-        if (distance < 50) {
-            position.set(target.x, target.y);
-            completed = true;
-        } else if (distance < closest) {
-            closest = distance;
-            closestGene = currentGene;
-        }
-    }
-
-    public float getAngle() {
-        float angle = (float) Math.toDegrees(Math.atan2((double)velocity.y,(double)velocity.x));
-        angle += 90;
-        if(angle < 0){ angle += 360; }
-        return angle;
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return gameControl.onTouchEvent(event);
     }
 }

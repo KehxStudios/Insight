@@ -17,52 +17,54 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
 
-package com.kehxstudios.insight.smartRockets;
+package com.kehxstudios.insight.tools;
 
-import com.kehxstudios.insight.tools.Vector2;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+
+import java.util.Random;
 
 /**
  *
  */
 
-public class Rocket {
+public abstract class GameActivity extends AppCompatActivity {
 
-    public static final float maxVelocity = DNA.geneRange;
+    protected GameView gameView;
+    protected GameControl gameControl;
+    protected float width, height;
 
-    public Vector2 position, acceleration, velocity;
-    public DNA dna;
-    public float fitness, closest;
-    public int closestGene, completedGene;
-    public boolean completed, crashed;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-    public Rocket(DNA dna, float x, float y) {
-        this.dna = dna;
-        position = new Vector2(x, y);
-        acceleration = new Vector2();
-        velocity = new Vector2();
-        fitness = 0f;
-        closest = 10000f;
-        closestGene = 0;
-        completedGene = 0;
-        completed = false;
-        crashed = false;
+        gameView = new GameView(this);
+        setContentView(gameView);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        width = metrics.widthPixels;
+        height = metrics.heightPixels;
     }
 
-    public void checkTarget(Vector2 target, int currentGene) {
-        float distance = position.distance(target);
-        if (distance < 50) {
-            position.set(target.x, target.y);
-            completed = true;
-        } else if (distance < closest) {
-            closest = distance;
-            closestGene = currentGene;
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameView.pause();
     }
 
-    public float getAngle() {
-        float angle = (float) Math.toDegrees(Math.atan2((double)velocity.y,(double)velocity.x));
-        angle += 90;
-        if(angle < 0){ angle += 360; }
-        return angle;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gameView.resume();
+    }
+
+    public void setUpdatesPerSecond(float ups) {
+        gameView.setUpdatesPerSecond(ups);
     }
 }

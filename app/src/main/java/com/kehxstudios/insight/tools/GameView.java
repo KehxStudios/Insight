@@ -1,3 +1,22 @@
+/*******************************************************************************
+ * Copyright 2017 See AUTHORS file.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+ * LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ ******************************************************************************/
+
 package com.kehxstudios.insight.tools;
 
 import android.content.Context;
@@ -9,22 +28,31 @@ import android.view.SurfaceView;
 import java.util.ArrayList;
 
 /**
- * Created by ReidC on 2017-06-11.
+ *
  */
 
-public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Callback {
+public class GameView extends SurfaceView implements Runnable, SurfaceHolder.Callback {
 
-    Thread thread = null;
-    SurfaceHolder surfaceHolder;
-    boolean running = false;
-    final float UPS_TARGET = 30f;
+    private Thread thread = null;
+    private SurfaceHolder surfaceHolder;
+    private boolean running = false;
+    private float updatesPerSecond;
 
     private ArrayList<GameObject> gameObjects;
 
-    public ViewPanel(Context context) {
+    public GameView(Context context) {
         super(context);
+        updatesPerSecond = 30f;
         surfaceHolder = getHolder();
         gameObjects = new ArrayList<>();
+    }
+
+    public void setUpdatesPerSecond(float ups) {
+        if (ups >= 1f && ups < 1000f) {
+            updatesPerSecond = ups;
+        } else {
+            Log.e("GameView", "setting @updatesPerSecond to out or range value, " + ups);
+        }
     }
 
     public void update(float delta) {
@@ -65,7 +93,7 @@ public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Ca
     public void run() {
         long lastTime = System.nanoTime();
         long timer = System.currentTimeMillis();
-        final double ns = 1000000000 / UPS_TARGET;
+        final double ns = 1000000000 / updatesPerSecond;
         float delta = 0;
         int frames = 0;
         int updates = 0;
@@ -77,7 +105,7 @@ public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Ca
             delta += (now - lastTime) / ns;
             lastTime = now;
             while (delta >= 1) {
-                update(1/UPS_TARGET);
+                update(1/updatesPerSecond);
                 updates++;
                 delta--;
             }
@@ -87,6 +115,7 @@ public class ViewPanel extends SurfaceView implements Runnable, SurfaceHolder.Ca
             frames++;
 
             if (System.currentTimeMillis() - timer >= 1000) {
+                Log.d("GameView", "ups - " + updates +" | fps - " + frames);
                 timer += 1000;
                 frames = 0;
                 updates = 0;
